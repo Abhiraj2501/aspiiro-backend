@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-01-03T09:55:55.229991",
-  "total_tests": 10,
-  "passed_tests": 7,
-  "success_rate": 70.0,
+  "timestamp": "2026-01-03T09:59:24.594958",
+  "total_tests": 12,
+  "passed_tests": 9,
+  "success_rate": 75.0,
   "results": [
     {
       "test": "Health Check",
@@ -21,8 +21,8 @@
     },
     {
       "test": "Admin Login",
-      "success": false,
-      "details": "Status: 401, Expected: 200, Response: {'detail': 'Invalid credentials'}"
+      "success": true,
+      "details": "Status: 200"
     },
     {
       "test": "Get All Products",
@@ -45,6 +45,11 @@
       "details": "Status: 200"
     },
     {
+      "test": "Create Product",
+      "success": false,
+      "details": "Status: 520, Expected: 200, Response: Internal Server Error"
+    },
+    {
       "test": "Create Order",
       "success": false,
       "details": "Status: 520, Expected: 200, Response: Internal Server Error"
@@ -53,6 +58,11 @@
       "test": "Create Razorpay Order",
       "success": false,
       "details": "Status: 520, Expected: 200, Response: {'detail': 'Failed to create order: Authentication failed'}"
+    },
+    {
+      "test": "Get All Orders (Admin)",
+      "success": true,
+      "details": "Status: 200"
     }
   ]
 }
