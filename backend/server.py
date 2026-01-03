@@ -315,8 +315,11 @@ async def create_order(request: CreateOrderRequest, email: str = Depends(get_cur
     )
     order_dict = order.model_dump()
     order_dict['created_at'] = order_dict['created_at'].isoformat()
-    await db.orders.insert_one(order_dict)
-    return {"success": True, "order": order_dict}
+    
+    result = await db.orders.insert_one(order_dict)
+    
+    return_order = {k: v for k, v in order_dict.items()}
+    return {"success": True, "order": return_order}
 
 @app.get("/api/orders")
 async def get_user_orders(email: str = Depends(get_current_user)):
