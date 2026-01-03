@@ -22,17 +22,19 @@ const AuthPage = () => {
     try {
       const res = await authAPI.sendOTP(email);
       if (res.data.success) {
+        setLoading(false);
         toast.success('OTP sent to your email');
         if (res.data.test_otp) {
-          toast.info(`Test OTP: ${res.data.test_otp}`);
+          toast.info(`Test OTP: ${res.data.test_otp}`, { duration: 10000 });
         }
         setStep('otp');
+        return;
       }
+      throw new Error('Failed to send OTP');
     } catch (error) {
-      toast.error('Failed to send OTP');
+      toast.error(error.response?.data?.detail || 'Failed to send OTP');
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const handleVerifyOTP = async (e) => {
