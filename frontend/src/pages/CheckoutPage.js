@@ -67,9 +67,9 @@ const CheckoutPage = () => {
         return;
       }
 
-      const paymentOrderRes = await paymentAPI.createOrder(getTotal());
+      const paymentOrderRes = await paymentAPI.createOrder(getTotal(), order.id);
       const { order_id, amount, currency, key_id } = paymentOrderRes.data;
-
+      
       const options = {
         key: key_id,
         amount,

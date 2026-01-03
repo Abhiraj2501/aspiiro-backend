@@ -11,6 +11,7 @@ class AspiiroAPITester:
         self.tests_run = 0
         self.tests_passed = 0
         self.test_results = []
+        self.last_order_id = None
 
     def log_test(self, name, success, details=""):
         """Log test result"""
@@ -273,6 +274,8 @@ class AspiiroAPITester:
             self.log_test("Get Order ID", False, "No order ID in response")
             return False
 
+        self.last_order_id = order_id  # store for payment tests
+
         # Test get user orders
         self.run_test(
             "Get User Orders",
@@ -319,14 +322,17 @@ class AspiiroAPITester:
             return False
 
         headers = {'Authorization': f'Bearer {self.user_token}'}
-        
-        # Test create Razorpay order
+        if not getattr(self, 'last_order_id', None):
+            self.log_test("Payment Flow", False, "No order_id available from previous test")
+            return False
+
+        # Test create Razorpay order - include order_id to tie payment to internal order
         success, response = self.run_test(
             "Create Razorpay Order",
             "POST",
             "api/payment/create-order",
             200,
-            data={"amount": 1000.0},
+            data={"amount": 1999.98, "order_id": self.last_order_id},
             headers=headers
         )
         
