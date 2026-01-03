@@ -256,8 +256,11 @@ async def get_product(product_id: str):
 async def create_product(product: ProductModel, _: str = Depends(get_admin_user)):
     product_dict = product.model_dump()
     product_dict['created_at'] = product_dict['created_at'].isoformat()
-    await db.products.insert_one(product_dict)
-    return {"success": True, "product": product_dict}
+    
+    result = await db.products.insert_one(product_dict)
+    
+    return_product = {k: v for k, v in product_dict.items()}
+    return {"success": True, "product": return_product}
 
 @app.put("/api/admin/products/{product_id}")
 async def update_product(product_id: str, product: ProductModel, _: str = Depends(get_admin_user)):
