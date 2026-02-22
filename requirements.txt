@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+motor
+python-dotenv
+pydantic[email]
+cloudinary
+razorpay
+sendgrid
+PyJWT
+bcrypt
+python-multipart
+
