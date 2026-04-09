@@ -23,11 +23,7 @@ Remaining amount is collected before or on delivery.
 5. Paste the link behind the Buy Now button
 6. Publish
 
-## Razorpay Setup
-- Create account at [razorpay.com](https://razorpay.com)
-- Complete KYC (PAN + bank account)
-- Use Test Mode during development
-- Switch to Live Mode before launch
+
 
 ## Local Development
 This project is built on Framer — no local setup needed.
